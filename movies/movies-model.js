@@ -1,16 +1,23 @@
-const db = require('../database/dbConfig');
+const db = require("../database/dbConfig");
 
 module.exports = {
-   getMovies,
-   remove
-}
+  getMovies,
+  remove,
+  insert
+};
 
 function getMovies() {
-   return db('movies');
+  return db("movies");
 }
 
 function remove(id) {
-   return db('movies')
-      .where({id})
-      .del();
-} 
+  return db("movies")
+    .where({ id })
+    .del();
+}
+
+async function insert(movie) {
+  return db("movies")
+    .insert(movie)
+    .returning("id");
+}
